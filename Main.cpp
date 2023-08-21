@@ -10,6 +10,8 @@ int main() {
 	vector<Reading> readings;
 	fill_vector(readings);
 	store_temps(readings);
-	
+
+	// Exercise Three
+	temp_stats(readings);
 
 }

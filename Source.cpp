@@ -43,3 +43,36 @@ void store_temps(const vector<Reading>& readings) {
 		ost << r.hour << " " << r.temperature << "\n";
 	}
 }
+
+void temp_stats(const vector<Reading>& readings) {
+
+	vector<double> temps;
+
+	for (Reading r : readings) {
+		temps.push_back(r.temperature);
+	}
+	
+	sort(temps.begin(), temps.end());
+	int n = temps.size();
+	double median = 0;
+	double sum = 0;
+	double mean = 0;
+
+	if (n % 2 == 0) {
+		double left = temps[(n / 2) - 1]; 
+		double right = temps[(n/2)];
+		median = (left + right) / 2;
+	}
+	else if (n % 2 != 0) {
+		//odd
+		median = temps[n-1] / 2;
+	}
+
+	for (double t : temps) {
+		sum += t;
+	}
+
+	mean = sum / n;
+
+	cout << "Median: " << median << "\n" << "Mean: " << mean << "\n";
+}
