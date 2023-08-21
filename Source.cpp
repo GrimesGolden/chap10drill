@@ -34,22 +34,42 @@ void fill_vector(vector<Reading>& readings) {
 	}
 }
 
-void store_temps(const vector<Reading>& readings) {
+void store_temps(const vector<Reading>& readings, char temp) {
+
+	if (temp != 'f' && temp != 'c') {
+		error("Error: temperate must be celsius or fahrenheit.");
+	}
+
 	string fn = "raw_temps.txt";
 		ofstream ost{ fn };
 	if (!ost) error("Can't open output file", fn);
-
-	for (Reading r : readings) {
-		ost << r.hour << " " << r.temperature << "\n";
+	
+	if (temp == 'f') {
+		for (Reading r : readings) {
+			ost << r.hour << " " << r.temperature << "\n";
+		}
+	}
+	else if (temp == 'c') {
+		for (Reading r : readings) {
+			double celsius = (r.temperature - 32) / 1.8;
+			ost << r.hour << " " << celsius << "\n";
+		}
 	}
 }
 
-void temp_stats(const vector<Reading>& readings) {
+void temp_stats() {
 
 	vector<double> temps;
+	string fn = "raw_temps.txt";
+	int hour = 0;
+	double temp = 0;
 
-	for (Reading r : readings) {
-		temps.push_back(r.temperature);
+	ifstream ist{ fn };
+
+	if (!ist) { error("Could not open ", fn); }
+
+	while (ist >> hour >> temp) {
+		temps.push_back(temp);
 	}
 	
 	sort(temps.begin(), temps.end());

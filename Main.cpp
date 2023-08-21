@@ -9,9 +9,9 @@ int main() {
 	// Exercise Two
 	vector<Reading> readings;
 	fill_vector(readings);
-	store_temps(readings);
+	store_temps(readings, 'c');
 
 	// Exercise Three
-	temp_stats(readings);
+	temp_stats();
 
 }

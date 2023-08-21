@@ -8,5 +8,5 @@ struct Reading {
 };
 
 void fill_vector(vector<Reading>& readings);
-void store_temps(const vector<Reading>& readings);
-void temp_stats(const vector<Reading>& readings);
+void store_temps(const vector<Reading>& readings, char temp);
+void temp_stats();
